@@ -1,0 +1,50 @@
+general {
+ colors = true
+ interval = 1
+ output_format = i3bar
+ color_good = "#D8D8D8"
+ color_degraded = "#AB4642"
+ color_bad = "#AB4642"
+ output_format = i3bar
+}
+
+order += "disk /"
+order += "cpu_usage"
+order += "volume master"
+order += "cpu_temperature 0"
+order += "wireless wlp5s0"
+order += "time"
+order += "tztime local"
+
+wireless wlp5s0 {
+ format_up = " %bitrate"
+ format_down = "WIFI: Down"
+}
+
+tztime local {
+ format = "📅%m-%d-%y "
+}
+
+time {
+ format = "🕔%H:%M"
+}
+
+cpu_usage {
+ format = " %usage"
+}
+
+disk "/" {
+ format = "💿%free"
+}
+
+volume master {
+ format = " %volume"
+ format_muted = ""
+ device = "pulse"
+}
+
+cpu_temperature 0 {
+ format = "🔥%degrees C"
+ path = "/sys/devices/pci0000:00/0000:00:02.0/0000:01:00.0/hwmon/hwmon2/temp1_input"
+ max_threshold = 50
+}
