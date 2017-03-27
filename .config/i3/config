@@ -221,4 +221,7 @@ client.background       #DFDFDF #181818 #ffffff #DFDFDF   #DFDFDF
 # Steam configs
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 for_window [class="^Steam$"] fullscreen, move container to workspace 5, workspace 5, popup_during_fullscreen leave_fullscreen
+
+# Other custom window configs
 for_window [title="Android Emulator"] floating enable 
+for_window [class="com-badlogic-gdx-setup-GdxSetup"] floating enable 
