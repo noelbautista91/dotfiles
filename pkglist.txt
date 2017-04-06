@@ -131,6 +131,7 @@ usbutils
 util-linux
 vi
 vim
+vim-youcompleteme-git
 vlc
 wget
 which
