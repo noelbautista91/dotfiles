@@ -52,5 +52,5 @@ alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)
 alias pbcopy="xsel --clipboard --input"
 alias pbpaste="xsel --clipboard --output"
 alias del="rm -rfv"
-alias pkglist="pacman -Qqe >> $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
+alias pkglist="pacman -Qqe > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
 alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"

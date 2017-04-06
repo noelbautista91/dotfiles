@@ -31,6 +31,7 @@ flex
 fontconfig
 freetype2
 gawk
+gcc
 gettext
 git
 glibc
@@ -41,6 +42,7 @@ grub
 grub-customizer
 gtk-engine-murrine
 gzip
+heroku-toolbelt
 i3-gaps-next-git
 i3lock
 i3status
@@ -52,6 +54,7 @@ iw
 jdk8-openjdk
 jfsutils
 keepass
+krita
 less
 lib32-libdrm
 lib32-openssl
@@ -59,6 +62,7 @@ libdrm
 libtool
 licenses
 linux
+linux-headers
 logrotate
 lsb-release
 lvm2
@@ -69,6 +73,7 @@ make
 man-db
 man-pages
 mdadm
+midori
 nano
 netctl
 network-manager-applet
@@ -83,6 +88,7 @@ openssh
 os-prober
 pacman
 patch
+pavucontrol
 pciutils
 pcmciautils
 perl
@@ -198,4 +204,5 @@ xorg-xwininfo
 xorg-xwud
 xsel
 yaourt
+zip
 zsh
