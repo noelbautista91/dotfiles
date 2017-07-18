@@ -34,3 +34,4 @@ fi
 compton --config ~/.config/compton/compton.conf &
 unclutter &
 exec i3
+

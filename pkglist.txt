@@ -27,6 +27,7 @@ feh
 file
 filesystem
 findutils
+firefox
 flex
 fontconfig
 freetype2
@@ -73,7 +74,6 @@ make
 man-db
 man-pages
 mdadm
-midori
 nano
 netctl
 network-manager-applet
@@ -86,6 +86,7 @@ numix-icon-theme-git
 obs-studio
 openssh
 os-prober
+otf-overpass
 pacman
 patch
 pavucontrol
@@ -97,7 +98,6 @@ procps-ng
 psmisc
 pulseaudio
 pulsemixer
-pycharm-community
 python-pip
 python2-powerline
 qemu
@@ -124,7 +124,6 @@ texinfo
 tk
 ttf-dejavu
 ttf-font-awesome
-ttf-overpass
 unclutter-xfixes-git
 unzip
 usbutils
