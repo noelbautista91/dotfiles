@@ -7,6 +7,9 @@ https://github.com/neovim/neovim
 https://github.com/ohmyzsh/ohmyzsh
 https://github.com/pyenv/pyenv
 
+Go to ./scripts folder
+Run ./install.sh
+
 ## TODO
 1) Makefile to install configs and software
 1a) MacOS

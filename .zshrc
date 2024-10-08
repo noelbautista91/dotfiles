@@ -72,6 +72,12 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
+
+export XDG_DATA_DIRS="$HOME/.local/share:/usr/local/share:/usr/share"
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(ruby -e print Gem.user_dir)/bin:/usr/lib/jvm/java-8-openjdk/jre/bin"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -108,7 +114,74 @@ alias proj="~/Documents/Projects"
 # Environment Variables
 export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
+  source "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
+  source "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
+
+# If not running interactively, don"t do anything
+[[ $- != *i* ]] && return
+
+# Aliases
+alias ls="ls --color=auto"
+alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)"
+alias pbcopy="xsel --clipboard --input"
+alias pbpaste="xsel --clipboard --output"
+alias del="rm -rfv"
+alias pkglist="pacman -Qqe > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
+alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
+alias vim="nvim"
+alias proj="cd $HOME/Documents/Projects/"
+alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)"
+alias rm="rm -I"
+
+# Environment Variables
+# export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
+export TERM=kitty
+export EDITOR=nvim
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+export FLYCTL_INSTALL="/home/noel/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+function check_for_update() {
+   local last_update_file="$HOME/.last_update_check"
+   local current_date=$(date +%s)
+   if [[ -f $last_update_file ]]; then
+        local last_update_date=$(cat $last_update_file)
+    else
+        local last_update_date=0
+    fi
+
+    # Calculate the time difference in seconds (14 days = 1209600 seconds)
+    local time_diff=$((current_date - last_update_date))
+    local two_weeks_in_seconds=1209600
+
+    # If two weeks have passed, prompt the user for an update
+    if [[ $time_diff -ge $two_weeks_in_seconds ]]; then
+        echo "It's been two weeks since your last system update."
+        echo "Do you want to update now? (Y/n): \c"
+        read answer
+        if [[ $answer == "" || $answer == "y" || $answer == "Y" ]]; then
+            sudo pacman -Syu && omz update && cleanup
+            echo $current_date > $last_update_file
+        else
+            echo "You chose not to update. I'll remind you again in two weeks."
+        fi
+    fi
+}
+
+check_for_update
