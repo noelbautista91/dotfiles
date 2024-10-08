@@ -1,0 +1,24 @@
+#!/bin/bash
+# Try to get the password and store both stdout and stderr into the variable
+password_output=$(op item get orbiter --format json --fields password 2>&1)
+
+# Check if the result contains an error by searching for the string '[ERROR]'
+if echo "$password_output" | grep -q "\[ERROR\]"; then
+	echo "Error occurred: $password_output"
+	exit 1 # Exit the script if there's an error
+fi
+
+# Extract the actual password (since password_output now includes both stderr and stdout)
+password=$(echo "$password_output" | jq -r .value)
+
+# Copy the password to clipboard
+echo -n "$password" | xclip -selection clipboard
+
+# Clear the clipboard after 60 seconds, but only if it still contains the password
+(
+	sleep 60
+	if [[ "$(xclip -o -selection clipboard)" == "$password" ]]; then
+		# If the clipboard still contains the password, clear it
+		echo -n "" | xclip -selection clipboard
+	fi
+) &
