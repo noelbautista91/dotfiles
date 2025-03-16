@@ -11,6 +11,13 @@ rm -f $HOME/.zshrc && ln -s $(realpath ./.zshrc) $HOME/.zshrc && echo ".zshrc is
 
 echo "Reload ~/.zshrc with 'source ~/.zshrc'"
 
+if [ ! -d "$HOME/.config/nvim" ]; then
+  git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
+  rm -rf "$HOME/.config/nvim/.git"
+else
+  echo "$HOME/.config/nvim already exists."
+fi
+
 echo "Creating symbolic links to app configs in ~/.config/"
 CONFIG_TARGET_DIR="$HOME/.config"
 CONFIG_SOURCE_DIR="$(realpath ./.config)"
@@ -24,7 +31,7 @@ fi
 for item in "$CONFIG_SOURCE_DIR"/*; do
   # Get the basename of the item (file or directory)
   basename=$(basename "$item")
-  
+
   # Create symbolic link in the $HOME/.config directory
   ln -sf "$item" "$CONFIG_TARGET_DIR/$basename"
   echo "Created symlink for $basename"

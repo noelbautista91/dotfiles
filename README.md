@@ -6,8 +6,8 @@ https://github.com/kovidgoyal/kitty
 https://github.com/neovim/neovim
 https://github.com/ohmyzsh/ohmyzsh
 https://github.com/pyenv/pyenv
+https://www.lazyvim.org/installation
 
-Go to ./scripts folder
 Run ./install.sh
 
 ## TODO

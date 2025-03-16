@@ -129,29 +129,27 @@ fi
 
 # Aliases
 alias ls="ls --color=auto"
-alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)"
-alias pbcopy="xsel --clipboard --input"
-alias pbpaste="xsel --clipboard --output"
+# alias pbcopy="xsel --clipboard --input"
+# alias pbpaste="xsel --clipboard --output"
 alias del="rm -rfv"
-alias pkglist="pacman -Qqe > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
 alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
 alias proj="cd $HOME/Documents/Projects/"
-alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)"
 alias rm="rm -I"
 
 # Environment Variables
 # export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
-export TERM=kitty
+export TERM=xterm-kitty
 export EDITOR=nvim
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-export FLYCTL_INSTALL="/home/noel/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
+# Optionally (when you use pyenv virtualenv)
+eval "$(pyenv virtualenv-init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -185,3 +183,5 @@ function check_for_update() {
 }
 
 check_for_update
+export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/Users/noelbautista/.rvm/bin
+export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin
