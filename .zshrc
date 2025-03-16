@@ -106,8 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias v="nvim"
-alias pbcopy="xclip -sel clipboard"
-alias pbpaste="xclip -sel clipboard -o"
+alias vs="nvim ."
 alias sauce="source ./env/bin/activate"
 alias proj="~/Documents/Projects"
 
