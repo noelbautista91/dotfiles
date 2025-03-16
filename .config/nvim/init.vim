@@ -45,6 +45,7 @@ call plug#end()
 "   filetype indent off   " Disable file-type-specific indentation
 "   syntax off            " Disable syntax highlighting
 
+map("n", "o", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
 set number
 set syntax
 colorscheme adwaita
