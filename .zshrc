@@ -1,187 +1,160 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+# -----------------------------------------------
+# General Settings and oh-my-zsh Configuration
+# -----------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
+# Uncomment as needed:
 # CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# Auto-update behavior (disabled here)
+zstyle ':omz:update' mode disabled
+# zstyle ':omz:update' mode auto
+# zstyle ':omz:update' mode reminder
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Plugins
 plugins=(git)
 
-export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
-
+# Base PATH settings
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin"
+export PATH="/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(ruby -e print Gem.user_dir)/bin:$PATH"
+export PATH="/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin:$PATH"
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/local/share:/usr/share"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(ruby -e print Gem.user_dir)/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin"
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias v="nvim"
-alias vs="nvim ."
-alias sauce="source ./env/bin/activate"
-alias proj="~/Documents/Projects"
-
-# Environment Variables
-export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
-
-# The next line updates PATH for the Google Cloud SDK.
-# if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
-#   source "$HOME/google-cloud-sdk/path.zsh.inc"
-# fi
-# 
-# # The next line enables shell command completion for gcloud.
-# if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
-#   source "$HOME/google-cloud-sdk/completion.zsh.inc"
-# fi
-
-# If not running interactively, don"t do anything
-[[ $- != *i* ]] && return
-
-# Aliases
-alias ls="ls --color=auto"
-# alias pbcopy="xsel --clipboard --input"
-# alias pbpaste="xsel --clipboard --output"
-alias del="rm -rfv"
-alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
-alias vim="nvim"
-alias proj="cd $HOME/Documents/Projects/"
-alias rm="rm -I"
-
-# Environment Variables
-# export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
+# Additional environment variables
+export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
 export TERM=xterm-kitty
 export EDITOR=nvim
+
+# Source oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# ------------------------------------------------
+# OS-Specific Updates
+# ------------------------------------------------
+
+function update-system-and-packages() {
+  echo "Attempting to update system and packages"
+  if [[ "$OSTYPE" == linux-gnu* ]]; then
+    echo "OSTYPE == linux-gnu*"
+    echo "Loading /etc/os-release"
+    source /etc/os-release
+    if [[ "$ID_LIKE" == "arch" ]]; then
+      echo "Detected Arch Linux"
+      echo "Performing `sudo pacman -Syu`"
+      sudo pacman -Syu
+      echo "Performing `yay -Syu`"
+      yay -Syu
+      echo "Performing `omz update`"
+      omz update
+    else
+      echo "Unsupported Linux distribution: $ID_LIKE"
+    fi
+  elif [[ "$OSTYPE" == darwin* ]]; then
+    echo "OSTYPE == darwin"
+    echo "Downloading software update from Apple"
+    sudo /usr/sbin/softwareupdate -ia
+    echo "Performing `brew update`"
+    brew update
+    echo "Performing `brew outdated`"
+    brew outdated
+    echo "Performing `brew upgrade`"
+    brew upgrade
+    echo "Performing `brew cleanup`"
+    brew cleanup
+    echo "Performing `omz update`"
+    omz update
+  else
+    echo "Unsupported OS"
+  fi
+}
+
+# ------------------------------------------------
+# Ask for update every two weeks
+# ------------------------------------------------
+
+last_update_file="$HOME/.last_update_check"
+current_date=$(date +%s)
+last_update_date=0
+
+# Read the last update date if the file exists.
+if [[ -f "$last_update_file" ]]; then
+  last_update_date=$(< "$last_update_file")
+fi
+
+two_weeks_in_seconds=1209600
+time_diff=$((current_date - last_update_date))
+
+if (( time_diff >= two_weeks_in_seconds )); then
+  printf "It's been two weeks since your last system update.\nDo you want to update now? (Y/n): "
+  read -r answer
+  # If answer is empty or starts with y or Y, then proceed.
+  if [[ -z "$answer" || "$answer" =~ ^[Yy] ]]; then
+    update-system-and-packages
+    echo "$current_date" > "$last_update_file"
+  else
+    printf "Update skipped; you'll be reminded again in two weeks.\n"
+  fi
+else
+  echo "Updated within the past 2 weeks, skipping upgrade check"
+fi
+
+# -----------------------------------------------
+# OS-Specific Aliases
+# -----------------------------------------------
+
+if [[ "$OSTYPE" == linux-gnu* ]]; then
+  echo "Setting Linux-specific aliases"
+
+  alias ls="ls --color=auto"
+  alias pbcopy="xsel --clipboard --input"
+  alias pbpaste="xsel --clipboard --output"
+elif [[ "$OSTYPE" == darwin* ]]; then
+  echo "Setting MacOS-specific aliases"
+
+  export PATH="/opt/homebrew/bin:$PATH"
+  alias openapp="open"
+fi
+
+# -----------------------------------------------
+# Common Aliases & Environment Variables
+# -----------------------------------------------
+echo "Setting common aliases"
+
+alias v="nvim"
+alias vim="nvim"
+alias vs="nvim ."
+alias sauce="source ./env/bin/activate"
+alias proj="cd ~/Documents/Projects"
+alias del="rm -rfv"
+alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
+alias rm="rm -I"
+
+# Setup fzf if installed
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Python environment setup via pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
+# Node Version Manager (nvm) setup
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
-function check_for_update() {
-   local last_update_file="$HOME/.last_update_check"
-   local current_date=$(date +%s)
-   if [[ -f $last_update_file ]]; then
-        local last_update_date=$(cat $last_update_file)
-    else
-        local last_update_date=0
-    fi
+# Google Cloud SDK (if installed)
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
+  source "$HOME/google-cloud-sdk/path.zsh.inc"
+fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
+  source "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
 
-    # Calculate the time difference in seconds (14 days = 1209600 seconds)
-    local time_diff=$((current_date - last_update_date))
-    local two_weeks_in_seconds=1209600
+# Exit early if not running interactively
+[[ $- != *i* ]] && return
 
-    # If two weeks have passed, prompt the user for an update
-    if [[ $time_diff -ge $two_weeks_in_seconds ]]; then
-        echo "It's been two weeks since your last system update."
-        echo "Do you want to update now? (Y/n): \c"
-        read answer
-        if [[ $answer == "" || $answer == "y" || $answer == "Y" ]]; then
-            sudo pacman -Syu && omz update && cleanup
-            echo $current_date > $last_update_file
-        else
-            echo "You chose not to update. I'll remind you again in two weeks."
-        fi
-    fi
-}
+# Additional environment variables
+export NVIM_QT_RUNTIME_PATH="$HOME/.local/nvim-qt.app/src/gui/runtime"
 
-check_for_update
-export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/Users/noelbautista/.rvm/bin
-export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

@@ -10,10 +10,16 @@ create_symlinks() {
     # Skip if item does not exist (handles empty directories)
     [ -e "$item" ] || continue
 
-    local basename=$(basename "$item")
-    local target_item="$target_dir"
+    temp_basename=$(basename "$item")
+    local basename="$temp_basename" # Assign to the final variable
 
+    # Define the target item
+    local target_item="$target_dir/$basename" # Ensure the target item includes the basename
+
+    # Create a symbolic link
     ln -snf "$item" "$target_item"
+
+    # Check if the item is a directory or a file and print the appropriate message
     if [ -d "$item" ]; then
       echo "Created symbolic link for directory $basename"
     else
@@ -23,13 +29,13 @@ create_symlinks() {
 }
 
 echo "Installing op password shortcut for keyring - pw"
-rm -f $HOME/.local/bin/pw && ln -snf $(realpath ./bin/pw) $HOME/.local/bin/pw && echo "pw is now available"
+rm -f "$HOME/.local/bin/pw" && ln -snf "$(realpath ./bin/pw)" "$HOME/.local/bin/pw" && echo "pw is now available"
 
 # echo "Pointing .zshenv to $(cat $(realpath ../.zshrc))"
 # rm -f $HOME/.zshenv && touch $HOME/.zshenv && echo "export ZDOTDIR=$(realpath ../.zshrc)" >>$HOME/.zshenv
 
 echo "Creating symbolic link to .zshrc"
-rm -f $HOME/.zshrc && ln -snf $(realpath ./.zshrc) $HOME/.zshrc && echo ".zshrc is now available"
+rm -f "$HOME/.zshrc" && ln -snf "$(realpath ./.zshrc)" "$HOME/.zshrc" && echo ".zshrc is now available"
 
 echo "Reload ~/.zshrc with 'source ~/.zshrc'"
 
