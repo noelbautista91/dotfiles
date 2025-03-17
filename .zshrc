@@ -147,9 +147,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-# Optionally (when you use pyenv virtualenv)
-eval "$(pyenv virtualenv-init -)"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
@@ -184,7 +181,6 @@ function check_for_update() {
 check_for_update
 export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/Users/noelbautista/.rvm/bin
 export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin
-=======
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
