@@ -76,7 +76,7 @@ export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
 
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/local/share:/usr/share"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(ruby -e print Gem.user_dir)/bin:/usr/lib/jvm/java-8-openjdk/jre/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(ruby -e print Gem.user_dir)/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,14 +114,14 @@ alias proj="~/Documents/Projects"
 export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
-  source "$HOME/google-cloud-sdk/path.zsh.inc"
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
-  source "$HOME/google-cloud-sdk/completion.zsh.inc"
-fi
+# if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
+#   source "$HOME/google-cloud-sdk/path.zsh.inc"
+# fi
+# 
+# # The next line enables shell command completion for gcloud.
+# if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
+#   source "$HOME/google-cloud-sdk/completion.zsh.inc"
+# fi
 
 # If not running interactively, don"t do anything
 [[ $- != *i* ]] && return
@@ -184,3 +184,8 @@ function check_for_update() {
 check_for_update
 export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/Users/noelbautista/.rvm/bin
 export PATH=/opt/homebrew/bin:/Users/noelbautista/.pyenv/plugins/pyenv-virtualenv/shims:/Users/noelbautista/.pyenv/shims:/Users/noelbautista/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/bin:/usr/lib/jvm/java-8-openjdk/jre/bin
+=======
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
