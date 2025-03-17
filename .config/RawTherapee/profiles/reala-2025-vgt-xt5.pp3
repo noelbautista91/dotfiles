@@ -9,12 +9,12 @@ InTrash=false
 [Exposure]
 Auto=false
 Clip=0.02
-Compensation=0.20000000000000001
+Compensation=0.63
 Brightness=0
-Contrast=16
+Contrast=29
 Saturation=2
 Black=0
-HighlightCompr=72
+HighlightCompr=87
 HighlightComprThreshold=0
 ShadowCompr=50
 HistogramMatching=false
@@ -22,7 +22,7 @@ CurveFromHistogramMatching=false
 ClampOOG=true
 CurveMode=FilmLike
 CurveMode2=Standard
-Curve=1;0;0;0.2578125;0.24609375;0.58984375;0.71875;1;1;
+Curve=1;0;0;0.21875;0.29296875;0.67187124490737915;0.73046875;1;1;
 Curve2=0;
 
 [HLRecovery]
@@ -66,7 +66,7 @@ TransmissionCurve=1;0;0.5;0.34999999999999998;0.34999999999999998;0.599999999999
 GainTransmissionCurve=1;0;0.10000000000000001;0.34999999999999998;0;0.25;0.25;0.34999999999999998;0.34999999999999998;0.69999999999999996;0.25;0.34999999999999998;0.34999999999999998;1;0.10000000000000001;0;0;
 
 [Local Contrast]
-Enabled=false
+Enabled=true
 Radius=80
 Amount=0.20000000000000001
 Darkness=1
@@ -122,7 +122,7 @@ LcCurve=0;
 ClCurve=0;
 
 [Sharpening]
-Enabled=false
+Enabled=true
 Contrast=20
 Method=usm
 Radius=0.5
@@ -150,13 +150,13 @@ PastSatTog=true
 SkinTonesCurve=0;
 
 [SharpenEdge]
-Enabled=false
+Enabled=true
 Passes=2
 Strength=50
 ThreeChannels=false
 
 [SharpenMicro]
-Enabled=false
+Enabled=true
 Matrix=false
 Strength=20
 Contrast=20
@@ -165,8 +165,8 @@ Uniformity=5
 [White Balance]
 Enabled=true
 Setting=Camera
-Temperature=4198
-Green=0.95799999999999996
+Temperature=3703
+Green=0.84799999999999998
 Equal=1
 TemperatureBias=0
 StandardObserver=TWO_DEGREES
@@ -279,10 +279,10 @@ Amount=10
 Anchor=50
 
 [Shadows & Highlights]
-Enabled=false
-Highlights=9
+Enabled=true
+Highlights=50
 HighlightTonalWidth=70
-Shadows=0
+Shadows=25
 ShadowTonalWidth=30
 Radius=40
 Lab=false
@@ -357,7 +357,7 @@ ControlLineTypes=
 Enabled=false
 Degree=0
 Feather=25
-Strength=0.59999999999999998
+Strength=0
 CenterX=0
 CenterY=0
 
@@ -511,10 +511,10 @@ AllowUpscaling=false
 
 [PostDemosaicSharpening]
 Enabled=true
-Contrast=10
+Contrast=8
 AutoContrast=true
 AutoRadius=true
-DeconvRadius=0.68000000000000005
+DeconvRadius=0.58999999999999997
 DeconvRadiusOffset=0
 DeconvIterCheck=true
 DeconvIterations=20
