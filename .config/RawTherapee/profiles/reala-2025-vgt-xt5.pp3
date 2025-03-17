@@ -12,7 +12,7 @@ Clip=0.02
 Compensation=0.20000000000000001
 Brightness=0
 Contrast=16
-Saturation=0
+Saturation=2
 Black=0
 HighlightCompr=72
 HighlightComprThreshold=0
@@ -22,7 +22,7 @@ CurveFromHistogramMatching=false
 ClampOOG=true
 CurveMode=FilmLike
 CurveMode2=Standard
-Curve=1;0;0;0.16015625;0.10546875;0.625;0.73046875;1;1;
+Curve=1;0;0;0.2578125;0.24609375;0.58984375;0.71875;1;1;
 Curve2=0;
 
 [HLRecovery]
@@ -73,8 +73,8 @@ Darkness=1
 Lightness=1
 
 [Channel Mixer]
-Enabled=false
-Red=1000;0;0;
+Enabled=true
+Red=1000;0;-70;
 Green=0;1000;0;
 Blue=0;0;1000;
 
@@ -420,7 +420,7 @@ Midthresd_0=0
 Midthresdch_0=0
 Higthresd_0=85
 Decayd_0=2
-Isogr_0=670
+Isogr_0=1600
 Strengr_0=3
 Scalegr_0=100
 Divgr_0=1
@@ -757,8 +757,8 @@ SCurve=0;
 VCurve=0;
 
 [SoftLight]
-Enabled=false
-Strength=30
+Enabled=true
+Strength=100
 
 [Film Simulation]
 Enabled=true
@@ -883,7 +883,7 @@ PreBlackBlue=0
 
 [MetaData]
 Mode=1
-ExifKeys=Exif.Image.Artist;Exif.Image.Copyright;Exif.Image.ImageDescription;Exif.Image.Make;Exif.Image.Model;Exif.Image.XResolution;Exif.Image.YResolution;Exif.Photo.DateTimeOriginal;Exif.Photo.ExposureBiasValue;Exif.Photo.ExposureTime;Exif.Photo.FNumber;Exif.Photo.Flash;Exif.Photo.FocalLength;Exif.Photo.ISOSpeedRatings;Exif.Photo.LensModel;Exif.Photo.UserComment;
+ExifKeys=*;
 
 [Film Negative]
 Enabled=false
