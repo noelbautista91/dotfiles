@@ -22,16 +22,13 @@ create_symlinks() {
   done
 }
 
-echo "Installing op password shortcut for keyring - pw"
-rm -f $HOME/.local/bin/pw && ln -snf $(realpath ./bin/pw) $HOME/.local/bin/pw && echo "pw is now available"
-
-# echo "Pointing .zshenv to $(cat $(realpath ../.zshrc))"
-# rm -f $HOME/.zshenv && touch $HOME/.zshenv && echo "export ZDOTDIR=$(realpath ../.zshrc)" >>$HOME/.zshenv
-
 echo "Creating symbolic link to .zshrc"
 rm -f $HOME/.zshrc && ln -snf $(realpath ./.zshrc) $HOME/.zshrc && echo ".zshrc is now available"
 
 echo "Reload ~/.zshrc with 'source ~/.zshrc'"
+
+echo "Creating symbolic link to .gitconfig"
+ln -snf "$(realpath ./.gitconfig)" "$HOME/.gitconfig"
 
 echo "Creating symbolic links to app configs in ~/.config/"
 CONFIG_TARGET_DIR="$HOME/.config"
@@ -43,3 +40,4 @@ if [ ! -d "$CONFIG_SOURCE_DIR" ]; then
 fi
 
 create_symlinks "$CONFIG_SOURCE_DIR" "$CONFIG_TARGET_DIR"
+

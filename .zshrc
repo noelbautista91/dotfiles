@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -21,7 +18,7 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -41,13 +38,13 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -70,13 +67,13 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git 1password alias-finder dotenv ssh dnf)
 
 export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
 
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/local/share:/usr/share"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(ruby -e print Gem.user_dir)/bin:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin:$HOME/bin:$HOME/.local/bin:/usr/local/bini:/opt/nvim-linux-x86_64/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,28 +85,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias v="nvim"
-alias pbcopy="xclip -sel clipboard"
-alias pbpaste="xclip -sel clipboard -o"
-alias sauce="source ./env/bin/activate"
-alias proj="~/Documents/Projects"
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Environment Variables
 export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
@@ -129,29 +109,29 @@ export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
 
 # Aliases
 alias ls="ls --color=auto"
-alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)"
-alias pbcopy="xsel --clipboard --input"
-alias pbpaste="xsel --clipboard --output"
+alias cleanup=cleanup_fedora
+alias pbcopy="wl-copy"
+alias pbpaste="wl-paste"
 alias del="rm -rfv"
-alias pkglist="pacman -Qqe > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
+alias pkglist="dnf repoquery --userinstalled --qf "%{name}" > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
 alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
 alias proj="cd $HOME/Documents/Projects/"
-alias cleanup="sudo pacman -Sc; paccache -ruk0; sudo pacman -Rns $(pacman -Qtdq)"
 alias rm="rm -I"
 
 # Environment Variables
 # export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
-export TERM=kitty
+export TERM=konsole
 export EDITOR=nvim
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Fuzzy Find
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
-export FLYCTL_INSTALL="/home/noel/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
+eval "$(pay-respects zsh --alias)"
+alias f="$(pay-respects zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -176,7 +156,7 @@ function check_for_update() {
         echo "Do you want to update now? (Y/n): \c"
         read answer
         if [[ $answer == "" || $answer == "y" || $answer == "Y" ]]; then
-            sudo pacman -Syu && omz update && cleanup
+            update_fedora
             echo $current_date > $last_update_file
         else
             echo "You chose not to update. I'll remind you again in two weeks."
@@ -185,6 +165,18 @@ function check_for_update() {
 }
 
 check_for_update
+
+function update_fedora() {
+    sudo dnf update && sudo dnf upgrade && cleanup
+}
+
+function update_arch() {
+    sudo pacman -Syu && omz update && cleanup
+}
+
+function cleanup_fedora() {
+    sudo dnf clean all
+}
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

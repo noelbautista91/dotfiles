@@ -48,4 +48,4 @@ call plug#end()
 map("n", "o", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
 set number
 set syntax
-colorscheme adwaita
+" colorscheme adwaita
