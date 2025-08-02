@@ -1,3 +1,14 @@
 [user]
 	email = noel@noynoy.org
 	name = Noel Bautista
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcOxXQPaZT+Cz7ZrDMEHc40Ba9HCyUWmvwVKJVaz/j4
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+
+[commit]
+	gpgsign = true
+
