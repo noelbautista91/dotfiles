@@ -113,7 +113,7 @@ alias cleanup=cleanup_fedora
 alias pbcopy="wl-copy"
 alias pbpaste="wl-paste"
 alias del="rm -rfv"
-alias pkglist="dnf repoquery --userinstalled --qf "%{name}" > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
+alias pkglist="dnf repoquery --userinstalled --qf '%{name}\n' > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
 alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
 alias proj="cd $HOME/Documents/Projects/"

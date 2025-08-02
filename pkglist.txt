@@ -395,6 +395,7 @@ procps-ng
 protobuf-lite
 psacct
 python3-augeas
+python3-pip
 python3-rapidfuzz
 python3-tkinter
 qemu-guest-agent
