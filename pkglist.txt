@@ -1,5 +1,6 @@
 1password
 1password-cli
+GConf2
 ModemManager
 NetworkManager
 NetworkManager-adsl
@@ -8,6 +9,7 @@ NetworkManager-config-connectivity-fedora
 NetworkManager-ppp
 NetworkManager-wifi
 NetworkManager-wwan
+ORBit2
 OpenTimelineIO
 PackageKit-command-not-found
 PackageKit-gstreamer-plugin
@@ -78,6 +80,7 @@ curl
 cyrus-sasl-plain
 daala-libs
 dbus
+dbus-glib
 default-editor
 default-fonts-cjk-mono
 default-fonts-cjk-sans
@@ -138,6 +141,8 @@ ghostscript-tools-fontutils
 git-core
 glibc
 glibc-all-langpacks
+gnome-vfs2
+gnome-vfs2-common
 gnu-free-fonts-common
 gnu-free-sans-fonts
 gnupg2
@@ -259,7 +264,9 @@ kwin
 kwrite
 lensfun
 less
+libIDL
 libappindicator-gtk3
+libbonobo
 libcddb
 libdca
 libdnf5-plugin-expired-pgp-keys
@@ -268,6 +275,8 @@ libebml
 libertas-firmware
 libgdither
 libglvnd-gles
+libgnome
+libheif-freeworld
 libid3tag
 libkate
 libmad
@@ -319,6 +328,8 @@ mozilla-openh264
 mpage
 mt7xxx-firmware
 mtr
+nautilus-dropbox
+nautilus-extensions
 ncurses
 neochat
 net-tools
@@ -400,6 +411,7 @@ python3-rapidfuzz
 python3-tkinter
 qemu-guest-agent
 qrca
+qt-heif-image-plugin
 quota
 rawtherapee
 re2
@@ -490,4 +502,3 @@ xwaylandvideobridge
 zip
 zram-generator-defaults
 zsh
-

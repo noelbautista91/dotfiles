@@ -73,7 +73,7 @@ export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
 
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/local/share:/usr/share"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin:$HOME/bin:$HOME/.local/bin:/usr/local/bini:/opt/nvim-linux-x86_64/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/bin/nvim-linux-x86_64/bin:/usr/local/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,24 +88,13 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Environment Variables
 export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
 
-# The next line updates PATH for the Google Cloud SDK.
-# if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
-#   source "$HOME/google-cloud-sdk/path.zsh.inc"
-# fi
-# 
-# # The next line enables shell command completion for gcloud.
-# if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
-#   source "$HOME/google-cloud-sdk/completion.zsh.inc"
-# fi
-
-# If not running interactively, don"t do anything
-[[ $- != *i* ]] && return
+export SUDO_EDITOR=$HOME/.local/bin/nvim-linux-x86_64/bin/nvim
 
 # Aliases
 alias ls="ls --color=auto"
@@ -116,6 +105,7 @@ alias del="rm -rfv"
 alias pkglist="dnf repoquery --userinstalled --qf '%{name}\n' > $HOME/pkglist.txt && echo \"Backup package list created successfully at $HOME\""
 alias dotfiles="/usr/bin/git --git-dir=$HOME/Projects/dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
+alias v="vim"
 alias proj="cd $HOME/Documents/Projects/"
 alias rm="rm -I"
 
@@ -132,6 +122,8 @@ export EDITOR=nvim
 
 eval "$(pay-respects zsh --alias)"
 alias f="$(pay-respects zsh)"
+
+export GPG_TTY=$(tty)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -182,4 +174,3 @@ function cleanup_fedora() {
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export GPG_TTY=$(tty)
