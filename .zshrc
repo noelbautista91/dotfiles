@@ -38,7 +38,7 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -62,18 +62,21 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Disable confirmation message by dotenv plugin
+ZSH_DOTENV_PROMPT=false
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git 1password alias-finder dotenv ssh dnf)
+plugins=(git 1password dotenv ssh dnf)
 
 export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk/jre/bin/java
 
 export XDG_DATA_DIRS="$HOME/.local/share:/usr/local/share:/usr/share"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/bin/nvim-linux-x86_64/bin:/usr/local/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/jvm/java-8-openjdk/jre/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/bin:$HOME/.local/bin:$HOME/.local/bin/nvim-linux-x86_64/bin:/usr/local/bin:$HOME/sdk/go1.24.5/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,6 +111,8 @@ alias vim="nvim"
 alias v="vim"
 alias proj="cd $HOME/Documents/Projects/"
 alias rm="rm -I"
+alias cc="claude --continue"
+alias goland="~/.local/share/JetBrains/Toolbox/apps/goland/bin/goland"
 
 # Environment Variables
 # export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
@@ -156,7 +161,7 @@ function check_for_update() {
     fi
 }
 
-check_for_update
+# check_for_update
 
 function update_fedora() {
     sudo dnf update && sudo dnf upgrade && cleanup
@@ -170,7 +175,30 @@ function cleanup_fedora() {
     sudo dnf clean all
 }
 
+function wtc() {
+    local feature_name="$1"
+    local current_dir=$(basename $(pwd))
+    local worktree_path="../feature/${current_dir}-${feature_name}"
+    
+    git worktree add "$worktree_path" && cd "$worktree_path"
+}
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+unsetopt correct
+unsetopt correct_all
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pnpm
+export PNPM_HOME="/home/noelbautista91/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+#
+source .private.env
 
