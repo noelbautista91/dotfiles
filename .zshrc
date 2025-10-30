@@ -200,5 +200,5 @@ case ":$PATH:" in
 esac
 # pnpm end
 #
-source .private.env
+[ -f ~/.private.env ] && source ~/.private.env
 
