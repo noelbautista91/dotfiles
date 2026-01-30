@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bd add:*)",
+      "Bash(bd --help:*)",
+      "Bash(bd create:*)",
+      "Bash(mkdir:*)",
+      "Bash(bd update --help:*)",
+      "Bash(bd show:*)",
+      "Bash(bd close:*)",
+      "Bash(bd list:*)",
+      "Bash(bd update:*)",
+      "Bash(zsh -i -c 'echo \"\"\"\"PROMPT=$PROMPT\"\"\"\"')",
+      "Bash(tmux list-sessions:*)",
+      "Bash(tmux source-file:*)",
+      "Bash(./install.sh)",
+      "Bash(zsh -i -c 'pwd')",
+      "Bash(echo:*)",
+      "Bash(print:*)",
+      "Bash(ps:*)",
+      "Bash(zsh -c 'source ~/.zshrc && tput colors')",
+      "Bash(zsh -i -c 'echo \"\"\"\"Test colors: Arrow should be green/red, path should be yellow\"\"\"\"; pwd')",
+      "Bash(TERM=konsole-256color tput:*)",
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

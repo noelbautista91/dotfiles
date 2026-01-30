@@ -1,0 +1,186 @@
+/**
+ * Breeze Dark Theme for Rofi
+ * Based on KDE Plasma Breeze Dark color scheme
+ * See .config/colors/breeze-dark.conf for full palette reference
+ */
+
+* {
+    /* Breeze Dark color definitions */
+    breeze-bg:              #292C30;
+    breeze-bg-alt:          #31363B;
+    breeze-fg:              #FCFCFC;
+    breeze-fg-inactive:     #A1A9B1;
+    breeze-accent:          #3DAEE9;
+    breeze-accent-alt:      #1D99F3;
+    breeze-error:           #DA4453;
+    breeze-success:         #27AE60;
+    breeze-warning:         #F67400;
+
+    /* Component colors */
+    background-color:       @breeze-bg;
+    text-color:             @breeze-fg;
+    border-color:           @breeze-accent;
+
+    /* Spacing */
+    spacing:                8;
+}
+
+window {
+    background-color:       @breeze-bg;
+    border:                 2;
+    border-color:           @breeze-accent;
+    border-radius:          4;
+    padding:                16;
+}
+
+mainbox {
+    background-color:       transparent;
+    spacing:                12;
+}
+
+inputbar {
+    background-color:       @breeze-bg-alt;
+    text-color:             @breeze-fg;
+    border:                 1;
+    border-color:           @breeze-accent;
+    border-radius:          4;
+    padding:                8 12;
+    spacing:                8;
+}
+
+prompt {
+    background-color:       transparent;
+    text-color:             @breeze-accent;
+    padding:                0;
+}
+
+entry {
+    background-color:       transparent;
+    text-color:             @breeze-fg;
+    placeholder:            "Type to search...";
+    placeholder-color:      @breeze-fg-inactive;
+    cursor:                 text;
+}
+
+case-indicator {
+    background-color:       transparent;
+    text-color:             @breeze-fg-inactive;
+}
+
+message {
+    background-color:       @breeze-bg-alt;
+    border:                 1;
+    border-color:           @breeze-warning;
+    border-radius:          4;
+    padding:                8;
+}
+
+textbox {
+    background-color:       transparent;
+    text-color:             @breeze-fg;
+}
+
+listview {
+    background-color:       transparent;
+    columns:                1;
+    lines:                  8;
+    spacing:                4;
+    cycle:                  false;
+    dynamic:                true;
+    scrollbar:              true;
+}
+
+scrollbar {
+    background-color:       @breeze-bg-alt;
+    handle-color:           @breeze-accent;
+    handle-width:           8;
+    border:                 0;
+    border-radius:          4;
+    padding:                0;
+}
+
+element {
+    background-color:       transparent;
+    text-color:             @breeze-fg;
+    padding:                8 12;
+    spacing:                8;
+    border:                 0;
+    border-radius:          4;
+}
+
+element normal.normal {
+    background-color:       transparent;
+    text-color:             @breeze-fg;
+}
+
+element normal.urgent {
+    background-color:       @breeze-error;
+    text-color:             @breeze-fg;
+}
+
+element normal.active {
+    background-color:       @breeze-success;
+    text-color:             @breeze-fg;
+}
+
+element selected.normal {
+    background-color:       @breeze-accent;
+    text-color:             @breeze-bg;
+}
+
+element selected.urgent {
+    background-color:       @breeze-error;
+    text-color:             @breeze-fg;
+}
+
+element selected.active {
+    background-color:       @breeze-accent-alt;
+    text-color:             @breeze-fg;
+}
+
+element alternate.normal {
+    background-color:       transparent;
+    text-color:             @breeze-fg;
+}
+
+element alternate.urgent {
+    background-color:       transparent;
+    text-color:             @breeze-error;
+}
+
+element alternate.active {
+    background-color:       transparent;
+    text-color:             @breeze-success;
+}
+
+element-text {
+    background-color:       transparent;
+    text-color:             inherit;
+    cursor:                 inherit;
+}
+
+element-icon {
+    background-color:       transparent;
+    size:                   1.2em;
+    cursor:                 inherit;
+}
+
+mode-switcher {
+    background-color:       @breeze-bg-alt;
+    border:                 1;
+    border-color:           @breeze-accent;
+    border-radius:          4;
+    spacing:                0;
+}
+
+button {
+    background-color:       transparent;
+    text-color:             @breeze-fg-inactive;
+    padding:                8 16;
+    border-radius:          4;
+}
+
+button selected {
+    background-color:       @breeze-accent;
+    text-color:             @breeze-bg;
+}

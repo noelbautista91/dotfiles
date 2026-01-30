@@ -5,7 +5,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="breeze-dark"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -116,7 +116,7 @@ alias goland="~/.local/share/JetBrains/Toolbox/apps/goland/bin/goland"
 
 # Environment Variables
 # export NVIM_QT_RUNTIME_PATH=~/.local/nvim-qt.app/src/gui/runtime
-export TERM=konsole
+export TERM=konsole-256color
 export EDITOR=nvim
 
 # Fuzzy Find
@@ -125,14 +125,21 @@ export EDITOR=nvim
 # command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 
-eval "$(pay-respects zsh --alias)"
-alias f="$(pay-respects zsh)"
+# eval "$(pay-respects zsh --alias)"
+# alias f="$(pay-respects zsh)"
 
 export GPG_TTY=$(tty)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+# start tmux with unique session per terminal
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  # Generate unique session name using PID and timestamp
+  local session_name="session-$$-$(date +%s)"
+  tmux new-session -s "$session_name"
+fi
 
 function check_for_update() {
    local last_update_file="$HOME/.last_update_check"
@@ -202,3 +209,19 @@ esac
 #
 [ -f ~/.private.env ] && source ~/.private.env
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/ollama/cuda_v12
+
+export LD_LIBRARY_PATH=:/usr/local/lib/ollama/cuda_v12:/usr/local/lib/ollama/cuda_v12:/usr/local/lib/ollama/cuda_v12
+
+# opencode
+export PATH=/home/noelbautista91/.opencode/bin:$PATH
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/noelbautista91/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# Add JBang to environment
+alias j!=jbang
+export PATH="$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"
+export JAVA_HOME=$HOME/.jbang/currentjdk
+alias drun='sudo docker run -it --network=host --device=/dev/kfd --device=/dev/dri --group-add=video --ipc=host --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --shm-size 8G -v $HOME/dockerx:/dockerx -w /dockerx'

@@ -30,6 +30,9 @@ echo "Reload ~/.zshrc with 'source ~/.zshrc'"
 echo "Creating symbolic link to .gitconfig"
 ln -snf "$(realpath ./.gitconfig)" "$HOME/.gitconfig"
 
+echo "Creating symbolic link to .tmux.conf"
+ln -snf "$(realpath ./.tmux.conf)" "$HOME/.tmux.conf"
+
 echo "Creating symbolic links to app configs in ~/.config/"
 CONFIG_TARGET_DIR="$HOME/.config"
 CONFIG_SOURCE_DIR="$(realpath ./.config)"
@@ -40,4 +43,22 @@ if [ ! -d "$CONFIG_SOURCE_DIR" ]; then
 fi
 
 create_symlinks "$CONFIG_SOURCE_DIR" "$CONFIG_TARGET_DIR"
+
+echo "Creating symbolic links for Oh My Zsh custom themes"
+OMZ_THEMES_SOURCE_DIR="$(realpath ./.oh-my-zsh/custom/themes)"
+OMZ_THEMES_TARGET_DIR="$HOME/.oh-my-zsh/custom/themes"
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Oh My Zsh is not installed at ~/.oh-my-zsh. Skipping theme symlinks."
+elif [ ! -d "$OMZ_THEMES_SOURCE_DIR" ]; then
+  echo "No custom themes found in dotfiles repository. Skipping."
+else
+  mkdir -p "$OMZ_THEMES_TARGET_DIR"
+  for theme_file in "$OMZ_THEMES_SOURCE_DIR"/*.zsh-theme; do
+    [ -e "$theme_file" ] || continue
+    theme_basename=$(basename "$theme_file")
+    ln -snf "$theme_file" "$OMZ_THEMES_TARGET_DIR/$theme_basename"
+    echo "Created symbolic link for Oh My Zsh theme: $theme_basename"
+  done
+fi
 

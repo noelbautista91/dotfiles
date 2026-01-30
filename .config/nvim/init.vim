@@ -11,7 +11,7 @@ call plug#begin()
 Plug 'https://github.com/equalsraf/neovim-gui-shim'
 
 " Theme
-Plug 'Mofiqul/adwaita.nvim'
+Plug 'fneu/breezy'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -51,4 +51,6 @@ call plug#end()
 map("n", "o", "<cmd>Neotree focus<cr>", { desc = "NeoTree focus" })
 set number
 set syntax
-" colorscheme adwaita
+set background=dark
+set termguicolors
+colorscheme breezy

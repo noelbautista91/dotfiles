@@ -18,3 +18,32 @@
 	defaultBranch = main
 [credential]
 	helper = osxkeychain
+
+# ============================================================================
+# Breeze Dark Color Scheme
+# See .config/colors/breeze-dark.conf for full palette reference
+# ============================================================================
+
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = blue bold
+	frag = yellow bold
+	old = red
+	new = green
+	commit = blue
+	whitespace = red reverse
+
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+	deleted = red
+	branch = blue bold
+
+[color "branch"]
+	current = blue bold
+	local = white
+	remote = green
+	upstream = cyan

@@ -149,4 +149,4 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "/usr/share/rofi/themes/Monokai.rasi"
+@theme "~/.config/rofi/breeze-dark.rasi"
