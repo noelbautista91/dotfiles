@@ -1,30 +1,61 @@
 # dotfiles
-Feb 2026 Update - We on NixOS now.
 
-## Installation
+NixOS and home-manager configurations using flakes.
 
+## Quick Start
 
-```
+```bash
+# Clone and enter the directory
 mkdir -p ~/Documents/Projects
-
 cd ~/Documents/Projects
+git clone <your-repo-url> dotfiles
+cd dotfiles
 
-git clone ..
-
-nixos-rebuild switch -I nixos-config=${HOME}/Documents/Projects/dotfiles/nixos-config/configuration.nix --sudo
-
-home-manager -f ${HOME}/Documents/Projects/dotfiles/home-manager/home.nix
+# Build the system (requires sudo)
+./bin/rebuild orbiter
 ```
 
-## TODO
-1) There should be no need to run home-manager -f ... switch separately. Updates / Installation should also be done by nixos-rebuild switch command.
+## Usage
 
-2) `pkgs_update` command should run nixos-rebuild ... script.
+### Rebuild the system
 
-3) Install xclip so I can use pbcopy / pbpaste aliases in .zshrc
+```bash
+./bin/rebuild
+```
 
-4) neovim should also have lazyvim setup. also our vim configs here should be migrated to use nix style.
+This will rebuild the NixOS configuration and home-manager together.
 
-5) use this .gitconfig and make sure nix installs that too.
+### Update packages and rebuild
 
-6) nix pkgs should work with both MacOS (darwin) and Linux.
+```bash
+./bin/pkgs_update
+```
+
+This updates the flake inputs and rebuilds the system.
+
+## Structure
+
+```
+.
+├── flake.nix                 # Flake entry point
+├── hosts/
+│   └── orbiter/              # Host-specific NixOS config
+│       ├── configuration.nix
+│       ├── hardware-configuration.nix
+│       └── nordvpn.nix
+├── home-manager/
+│   └── home.nix              # Home-manager configuration
+└── bin/
+    ├── rebuild               # Quick rebuild script
+    └── pkgs_update           # Update and rebuild script
+```
+
+## Requirements
+
+- Nix with flakes enabled
+- sudo access (for system configuration)
+
+## Notes
+
+- Uses `nixos-unstable` channel via flake
+- Home-manager is integrated with nixos-rebuild (no separate command needed)

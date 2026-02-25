@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FLAKE_DIR="$(dirname "$SCRIPT_DIR")"
+
+HOST="${1:-orbiter}"
+
+echo "Updating NixOS and home-manager for $HOST..."
+
+echo ">> Flake update..."
+cd "$FLAKE_DIR"
+nix flake update
+
+echo ">> Building NixOS configuration..."
+sudo nixos-rebuild switch --flake "$FLAKE_DIR#$HOST"
+
+echo ""
+echo "Update complete!"
