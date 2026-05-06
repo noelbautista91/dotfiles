@@ -3,8 +3,13 @@
 {
   home.stateVersion = "25.11";
 
-  xdg.configFile."opencode/AGENTS.md" = {
-    source = ./../../config/opencode/AGENTS.md;
+  xdg.configFile = {
+    "opencode/AGENTS.md" = {
+      source = ./../../config/opencode/AGENTS.md;
+    };
+    "mcpu/config.json" = {
+      source = ./../../config/mcpu/config.json;
+    };
   };
 
   home.sessionVariables = {

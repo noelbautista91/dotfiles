@@ -32,6 +32,11 @@ dotfiles/
 │   ├── update-lockfile               # Update lockfile then rebuild
 │   ├── pw                            # 1Password CLI helper
 │   └── test-nixos-vm                 # Build + launch test VM
+├── config/
+│   ├── mcpu/
+│   │   └── config.json               # MCP multiplexer server definitions (mcpu)
+│   └── opencode/
+│       └── AGENTS.md                 # Global opencode instructions
 ├── modules/
 │   ├── nixos/                        # Shared NixOS system modules
 │   │   ├── default.nix               # Aggregator — imports all sub-modules
@@ -115,6 +120,31 @@ Edit `modules/home-manager/gui.nix` — add to `programs.plasma.shortcuts`.
 
 ### Adding a firewall port
 Edit `modules/nixos/networking.nix` — add to `networking.firewall.allowedTCPPorts` or `allowedUDPPorts`.
+
+### Adding an MCP server
+
+MCP servers are managed through **mcpu**, an MCP multiplexer. opencode connects to mcpu as a single MCP server, and mcpu fans out to all upstream servers.
+
+1. Edit `config/mcpu/config.json` — add a new server entry:
+   ```json
+   "my-server": {
+     "command": "npx",
+     "args": ["-y", "my-mcp-server"]
+   }
+   ```
+2. If the new config file isn't already git-tracked, stage it: `git add config/mcpu/config.json`
+3. Run `bin/update` to rebuild and propagate the config to `~/.config/mcpu/config.json`
+
+Common server command patterns:
+| Runtime | Command pattern |
+|---------|----------------|
+| npm/npx | `"command": "npx", "args": ["-y", "@scope/mcp-server"]` |
+| Python/uv | `"command": "uvx", "args": ["mcp-server-pkg"]` |
+| Nix | `"command": "nix", "args": ["shell", "nixpkgs#uv", "--command", "uvx", "mcp-server-pkg"]` |
+
+To **disable** a server without removing it, add `"enabled": false` to its entry.
+
+The mcpu config is propagated to `~/.config/mcpu/` via `xdg.configFile` in `modules/home-manager/cli.nix`.
 
 ## How to Test Changes
 
