@@ -12,8 +12,5 @@
 
   security.rtkit.enable = lib.mkDefault true;
 
-  hardware.graphics = {
-    enable = lib.mkDefault true;
-    extraPackages = with pkgs; [ ];
-  };
+  hardware.graphics.enable = lib.mkDefault true;
 }

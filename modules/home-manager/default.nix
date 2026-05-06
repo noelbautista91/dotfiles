@@ -7,5 +7,6 @@
     ./browsers.nix
     ./terminal.nix
     ./packages.nix
+    ./rofi.nix
   ];
 }

@@ -3,21 +3,21 @@
 {
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;
-      warn-dirty = false;
+      experimental-features = lib.mkDefault [ "nix-command" "flakes" ];
+      auto-optimise-store = lib.mkDefault true;
+      warn-dirty = lib.mkDefault false;
     };
 
     gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+      automatic = lib.mkDefault true;
+      dates = lib.mkDefault "weekly";
+      options = lib.mkDefault "--delete-older-than 7d";
     };
 
-    optimise.automatic = true;
+    optimise.automatic = lib.mkDefault true;
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = lib.mkDefault true;
 
   programs.nix-ld.enable = lib.mkDefault true;
 }

@@ -8,7 +8,7 @@ When adding a new alias, add it to the `shellAliases` attribute set in that file
 
 ```nix
 shellAliases = {
-  opencode-dev = "nix run /home/noelbautista91/Documents/Projects/opencode";
+  opencode-dev = "nix run ${config.home.homeDirectory}/Documents/Projects/opencode";
 };
 ```
 
@@ -41,7 +41,7 @@ dotfiles/
 │   │   ├── gpu.nix                   # GPU config (AMD ROCm / Intel / NVIDIA)
 │   │   ├── networking.nix            # NetworkManager, firewall, DNS (kresd)
 │   │   ├── nix.nix                   # Nix daemon settings, garbage collection, nix-ld
-│   │   ├── packages.nix              # System-level packages (zsh, nodejs, rofi, etc.)
+│   │   ├── packages.nix              # System-level packages (nodejs, etc.)
 │   │   ├── security.nix              # SSH hardening, 1Password, firejail, Firefox
 │   │   ├── services.nix              # Timezone, locale, libinput, btrfs
 │   │   ├── users.nix                 # User creation, groups, SSH keys (option: my.user.name)
@@ -50,9 +50,10 @@ dotfiles/
 │   │   ├── default.nix               # Aggregator — imports all sub-modules
 │   │   ├── cli.nix                   # zsh, git, ssh, tmux, direnv, distrobox, aliases, session vars, PATH
 │   │   ├── editors.nix              # Neovim
-│   │   ├── browsers.nix             # Qutebrowser
+│   │   ├── browsers.nix             # Default browser (Firefox), xdg-mime defaults
 │   │   ├── terminal.nix             # Ghostty
 │   │   ├── gui.nix                  # Plasma desktop config (shortcuts, kwin, theme)
+│   │   ├── rofi.nix                 # Rofi launcher config
 │   │   └── packages.nix             # User packages (vlc, etc.)
 │   └── darwin/                        # Shared macOS system modules
 │       ├── default.nix               # macOS defaults (dock, finder, trackpad, keyboard)
@@ -140,6 +141,10 @@ Edit `modules/nixos/networking.nix` — add to `networking.firewall.allowedTCPPo
 - Custom options use the `my` namespace (e.g., `my.hardware.gpu`, `my.user.name`)
 - Never import `home-manager/home.nix` or `home-manager/plasma.nix` — those files no longer exist; use `modules/home-manager` instead
 - The `gui.nix` module requires `plasma-manager` flake input, which is wired through host flake-modules
+
+## Documentation Rule
+
+- Whenever you create a new `.nix` module file, you **must** update the repo structure table in this file to document its purpose. Undocumented modules are a maintenance hazard.
 
 ## What NOT to Do
 

@@ -71,7 +71,7 @@
       del = "rm -rf";
       rm = "rm -I";
       cc = "claude";
-      opencode-dev = "nix run /home/noelbautista91/Documents/Projects/opencode";
+      opencode-dev = "nix run ${config.home.homeDirectory}/Documents/Projects/opencode";
     };
     oh-my-zsh = {
       enable = true;

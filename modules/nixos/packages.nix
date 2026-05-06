@@ -8,9 +8,7 @@
     kdeconnect-kde
     nodejs
     podman-tui
-    rofi
     telegram-desktop
     uv
-    zsh
   ];
 }

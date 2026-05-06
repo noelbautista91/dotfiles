@@ -10,7 +10,8 @@
   };
 
   networking.stevenblack = {
-    enable = lib.mkDefault false;
+    enable = lib.mkDefault true;
+    block = lib.mkDefault [ "fakenews" "gambling" "porn" ];
   };
 
   services.resolved = lib.mkDefault { enable = false; };
