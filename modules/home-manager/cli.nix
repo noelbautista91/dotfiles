@@ -38,7 +38,7 @@
     };
     signing = {
       signByDefault = true;
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJO7b+YRjNbRqms5s8hC1IHcOxXQPaZT+Cz7ZrDMEHc4";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBg8wanF/61h6IizynEwyrXwTx3TTt5/37Cz0Ao8Nq+d";
     };
   };
 

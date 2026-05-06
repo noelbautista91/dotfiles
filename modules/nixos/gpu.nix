@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  rocmPkgs = with pkgs; [ rocblas hipblas clr ];
+  rocmPkgs = with pkgs.rocmPackages; [ rocblas hipblas clr ];
 in
 {
   options.my.hardware.gpu = {
@@ -28,11 +28,6 @@ in
         mesa
         rocmPackages.clr.icd
       ];
-
-      environment.sessionVariables = {
-        VK_ICD_FILENAMES =
-          "/run/opengl-driver/etc/vulkan/icd.d/radeon_icd.x86_64.json";
-      };
 
       systemd.tmpfiles.rules = [
         "L+     /opt/rocm   -    -    -    -    ${pkgs.symlinkJoin { name = "rocm"; paths = rocmPkgs; }}"
