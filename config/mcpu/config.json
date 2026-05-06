@@ -21,7 +21,7 @@
     "args": ["@playwright/mcp@latest"]
   },
   "nixos": {
-    "command": "nix",
-    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "mcp-nixos"]
+    "command": "uvx",
+    "args": ["mcp-nixos"]
   }
 }

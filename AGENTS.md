@@ -135,12 +135,13 @@ MCP servers are managed through **mcpu**, an MCP multiplexer. opencode connects 
 2. If the new config file isn't already git-tracked, stage it: `git add config/mcpu/config.json`
 3. Run `bin/update` to rebuild and propagate the config to `~/.config/mcpu/config.json`
 
-Common server command patterns:
+Common server command patterns (always wrap with `nix shell` so runtimes are available on NixOS):
 | Runtime | Command pattern |
 |---------|----------------|
-| npm/npx | `"command": "npx", "args": ["-y", "@scope/mcp-server"]` |
-| Python/uv | `"command": "uvx", "args": ["mcp-server-pkg"]` |
-| Nix | `"command": "nix", "args": ["shell", "nixpkgs#uv", "--command", "uvx", "mcp-server-pkg"]` |
+| npm/npx | `"command": "nix", "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "@scope/mcp-server"]` |
+| Python/uv | `"command": "nix", "args": ["shell", "nixpkgs#uv", "--command", "uvx", "mcp-server-pkg"]` |
+
+> **Note:** `nodejs` and `uv` are installed as system packages (see `modules/nixos/packages.nix`), so bare `npx`/`uvx` commands work directly. Using `nix shell` wrappers adds startup latency that can cause mcpu timeouts — prefer bare commands when the runtime is already in PATH.
 
 To **disable** a server without removing it, add `"enabled": false` to its entry.
 

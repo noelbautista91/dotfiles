@@ -6,7 +6,7 @@
     dive
     docker-compose
     kdeconnect-kde
-    nodejs
+    nodejs_24
     podman-tui
     telegram-desktop
     uv
