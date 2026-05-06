@@ -1,34 +1,26 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, ... }:
 
-let
-  username = "noelbautista91";
-  hostname = "orbiter";
-in
 {
-  nixosConfigurations = {
-    ${hostname} = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        ./configuration.nix
-        ({ pkgs, ... }: {
-          home-manager.users.${username} = import ../../home-manager/home.nix {
-            inherit pkgs;
-            username = username;
-            homeDirectory = "/home/${username}";
-            stateVersion = "25.11";
+  flake.nixosConfigurations.orbiter = inputs.nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = { inherit inputs; };
+    modules = [
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.noelbautista91 = {
+            imports = [
+              inputs.plasma-manager.homeModules.plasma-manager
+              ../../modules/home-manager
+              ../../modules/home-manager/gui.nix
+            ];
           };
-        })
-      ];
-    };
-  };
-
-  homeConfigurations = {
-    "${username}@${hostname}" = inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = import inputs.nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
-      modules = [
-        ../../home-manager/home.nix
-      ];
-    };
+          extraSpecialArgs = { inherit inputs; };
+        };
+      }
+      ./configuration.nix
+    ];
   };
 }

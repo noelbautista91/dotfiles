@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Building NixOS test VM..."
+nix build --impure .#nixosConfigurations.test-vm.config.system.build.vm --show-trace
+
+echo "Launching VM..."
+exec ./result/bin/run-test-vm-vm
