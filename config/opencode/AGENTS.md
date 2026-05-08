@@ -120,6 +120,65 @@ Never write commands like `python3 script.py` or `jq '.' file.json` without wrap
 ### File paths in Nix scripts
 When writing Nix derivations or scripts that reference files, use relative paths from the repo root or `builtins.pathExists` checks. Never hardcode absolute paths like `/home/username/...` in Nix modules — use `config.home.homeDirectory` or `config.users.users.<name>.home` instead.
 
+## ChromaDB — Persistent Memory
+
+ChromaDB (via `chroma` MCP server in mcpu) is your long-term memory. Use it
+proactively — do not wait for the user to ask.
+
+### Collections
+
+Namespaced by project (repo directory name, lowercase): `<project>-decisions`,
+`<project>-fixes`, `<project>-preferences`, `<project>-context`. One global
+collection: `global-preferences`.
+
+| Collection | What to store | ID format |
+|---|---|---|
+| `<project>-decisions` | Architectural choices, tradeoffs, rationale | `decision:<scope>:<topic>` |
+| `<project>-fixes` | Bugs resolved — symptom, cause, fix | `fix:<area>:<keyword>` |
+| `<project>-preferences` | Project-specific style/workflow preferences | `pref:<topic>` |
+| `<project>-context` | Conventions, gotchas, structural facts | `ctx:<area>:<topic>` |
+| `global-preferences` | Preferences applying across all projects | `pref:<topic>` |
+
+If a collection doesn't exist yet, create it with `create_collection` before
+writing.
+
+### Document format
+
+Each document = one atomic fact. Include metadata with every document:
+
+```
+Declarative statement of the fact.
+
+Why: context on why this matters or when it's relevant.
+```
+
+Required metadata: `{"date": "YYYY-MM-DD", "source": "opencode", "category": "architecture|bug|style|convention|gotcha|preference", "module": "..."}`
+
+### Query triggers (always)
+
+- Before debugging an error → search `<project>-fixes`
+- Before architectural/design choices → search `<project>-decisions`
+- Before style or formatting decisions → search `<project>-preferences` and `global-preferences`
+- When unfamiliar with a project area → search `<project>-context`
+
+### Write triggers (always)
+
+- After resolving a non-obvious bug → `<project>-fixes`
+- After making a design decision → `<project>-decisions`
+- After learning a user preference → `<project>-preferences` or `global-preferences`
+- After discovering a convention or gotcha → `<project>-context`
+
+Before writing to `decisions` or `fixes`: query first to check for duplicates.
+Use `peek_collection` or `get_documents` by ID. If similar exists, use
+`update_documents` instead of `add_documents`.
+
+### Hygiene
+
+- One fact per document, not compound knowledge dumps
+- No ephemeral state (currently-open files, temp decisions)
+- No secrets (tokens, keys, passwords)
+- Prune stale entries when you find them during queries (update or delete)
+
 ## Dotfiles Repo Conventions
 
 When working in this specific dotfiles repo:
