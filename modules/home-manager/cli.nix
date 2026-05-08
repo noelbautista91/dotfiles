@@ -91,6 +91,10 @@
     };
     initContent = ''
       HYPHEN_INSENSITIVE="true"
+
+      if [ -z "$TMUX" ]; then
+        exec tmux new-session -A -s main
+      fi
     '';
   };
 
@@ -99,6 +103,23 @@
     mouse = true;
     terminal = "xterm-256color";
     extraConfig = builtins.readFile ./tmux.conf;
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      {
+        plugin = tmuxPlugins.resurrect;
+        extraConfig = ''
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-strategy-nvim 'session'
+        '';
+      }
+      {
+        plugin = tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15'
+        '';
+      }
+    ];
   };
 
   programs.direnv = {

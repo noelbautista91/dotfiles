@@ -53,8 +53,17 @@ dotfiles/
 │   │   └── virtualization.nix        # Podman, Docker compat
 │   ├── home-manager/                 # Shared home-manager user modules
 │   │   ├── default.nix               # Aggregator — imports all sub-modules
-│   │   ├── cli.nix                   # zsh, git, ssh, tmux, direnv, distrobox, aliases, session vars, PATH, playwright-mcp service
-│   │   ├── editors.nix              # Neovim
+│   │   ├── cli.nix                   # zsh, git, ssh, tmux (resurrect, continuum), direnv, distrobox, aliases, session vars, PATH, playwright-mcp service
+│   │   ├── tmux.conf                 # Tmux style/theme config (plugins configured in cli.nix)
+│   │   ├── editors.nix              # Neovim (nixvim entry point + IntelliJ keymaps)
+│   │   ├── nixvim-plugins/           # NixVIM plugin sub-modules
+│   │   │   ├── lsp.nix                # LSP servers (gopls, nil, ts_ls, pyright, ruff, jsonls, html, lua_ls) + keymaps
+│   │   │   ├── completion.nix        # nvim-cmp + luasnip + friendly-snippets
+│   │   │   ├── ui.nix                # catppuccin, lualine, bufferline, neo-tree, which-key, indent-blankline, todo-comments, mini.icons
+│   │   │   ├── git.nix               # gitsigns + lazygit
+│   │   │   ├── editing.nix           # treesitter, conform (format on save), comment, surround, autopairs
+│   │   │   ├── telescope.nix         # telescope + fzf extension
+│   │   │   └── dap.nix                # DAP + dap-go, dap-python, dap-ui
 │   │   ├── browsers.nix             # Default browser (Firefox), xdg-mime defaults
 │   │   ├── terminal.nix             # Ghostty
 │   │   ├── gui.nix                  # Plasma desktop config (shortcuts, kwin, theme)

@@ -13,6 +13,7 @@
           users.noelbautista91 = {
             imports = [
               inputs.plasma-manager.homeModules.plasma-manager
+              inputs.nixvim.homeModules.nixvim
               ../../modules/home-manager
               ../../modules/home-manager/gui.nix
             ];

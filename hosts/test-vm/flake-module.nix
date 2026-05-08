@@ -12,6 +12,7 @@
           useUserPackages = true;
           users.noelbautista91 = {
             imports = [
+              inputs.nixvim.homeModules.nixvim
               ../../modules/home-manager
             ];
           };

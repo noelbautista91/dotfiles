@@ -20,10 +20,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, plasma-manager, nix-darwin, flake-parts, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, plasma-manager, nix-darwin, nixvim, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
       { lib, ... }:
       {
