@@ -234,6 +234,7 @@
       plasmashell."switch to next activity" = [ ];
       plasmashell."switch to previous activity" = [ ];
       plasmashell."toggle do not disturb" = [ ];
+      "services/org.kde.spectacle.desktop".RectangularRegionScreenShot = "Ctrl+$";
       "services/com.mitchellh.ghostty.desktop"._launch = [ ];
     };
     configFile = {
