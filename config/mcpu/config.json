@@ -1,27 +1,27 @@
 {
   "memory": {
-    "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-memory"]
+    "command": "nix",
+    "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "@modelcontextprotocol/server-memory"]
   },
   "chroma": {
-    "command": "uvx",
-    "args": ["chroma-mcp", "--client-type", "persistent", "--data-dir", "/home/noelbautista91/Documents/Projects/memory"]
+    "command": "nix",
+    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "chroma-mcp", "--client-type", "persistent", "--data-dir", "/home/noelbautista91/Documents/Projects/memory"]
   },
   "beads": {
-    "command": "uvx",
-    "args": ["beads-mcp"]
+    "command": "nix",
+    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "beads-mcp"]
   },
   "sequential-thinking": {
-    "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+    "command": "nix",
+    "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
     "enabled": false
   },
   "playwright": {
-    "command": "npx",
-    "args": ["@playwright/mcp@latest"]
+    "type": "http",
+    "url": "http://localhost:8931/mcp"
   },
   "nixos": {
-    "command": "uvx",
-    "args": ["mcp-nixos"]
+    "command": "nix",
+    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "mcp-nixos"]
   }
 }

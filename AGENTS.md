@@ -53,7 +53,7 @@ dotfiles/
 │   │   └── virtualization.nix        # Podman, Docker compat
 │   ├── home-manager/                 # Shared home-manager user modules
 │   │   ├── default.nix               # Aggregator — imports all sub-modules
-│   │   ├── cli.nix                   # zsh, git, ssh, tmux, direnv, distrobox, aliases, session vars, PATH
+│   │   ├── cli.nix                   # zsh, git, ssh, tmux, direnv, distrobox, aliases, session vars, PATH, playwright-mcp service
 │   │   ├── editors.nix              # Neovim
 │   │   ├── browsers.nix             # Default browser (Firefox), xdg-mime defaults
 │   │   ├── terminal.nix             # Ghostty
@@ -141,7 +141,7 @@ Common server command patterns (always wrap with `nix shell` so runtimes are ava
 | npm/npx | `"command": "nix", "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "@scope/mcp-server"]` |
 | Python/uv | `"command": "nix", "args": ["shell", "nixpkgs#uv", "--command", "uvx", "mcp-server-pkg"]` |
 
-> **Note:** `nodejs` and `uv` are installed as system packages (see `modules/nixos/packages.nix`), so bare `npx`/`uvx` commands work directly. Using `nix shell` wrappers adds startup latency that can cause mcpu timeouts — prefer bare commands when the runtime is already in PATH.
+> **Note:** Always use `nix shell` wrappers — bare `npx`/`uvx` are **not** on PATH in mcpu's child process environment, even though `nodejs` and `uv` are system packages. The wrappers add ~1-2s startup latency but are required for mcpu to find the binaries.
 
 To **disable** a server without removing it, add `"enabled": false` to its entry.
 

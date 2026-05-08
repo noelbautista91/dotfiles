@@ -110,4 +110,19 @@
   programs.distrobox = {
     enable = true;
   };
+
+  systemd.user.services.playwright-mcp = {
+    Unit = {
+      Description = "Playwright MCP server (HTTP/SSE)";
+      After = [ "network.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.nix}/bin/nix shell nixpkgs#nodejs --command npx @playwright/mcp@0.0.75 --headless --port 8931";
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
 }
