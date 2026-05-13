@@ -7,6 +7,9 @@
     "opencode/AGENTS.md" = {
       source = ./../../config/opencode/AGENTS.md;
     };
+    "opencode/opencode.json" = {
+      source = ./../../config/opencode/opencode.json;
+    };
     "mcpu/config.json" = {
       source = ./../../config/mcpu/config.json;
     };

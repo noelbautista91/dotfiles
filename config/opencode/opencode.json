@@ -1,0 +1,64 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "tools": {
+    "write": true,
+    "read": true,
+    "bash": true,
+    "webfetch": true,
+    "edit": true,
+    "grep": true,
+    "glob": true,
+    "list": true,
+    "patch": true,
+    "todowrite": true,
+    "todoread": true
+  },
+  "permission": {
+    "edit": "allow",
+    "bash": "allow",
+    "skill": "ask",
+    "webfetch": "allow",
+    "doom_loop": "deny",
+    "external_directory": "ask"
+  },
+  "agent": {
+    "explore": {
+      "mode": "subagent",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    }
+  },
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama.cpp",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "Qwen3.6-35B-A3B-UD-Q4_K_M": {
+          "name": "Qwen3.6-35B-A3B-UD-Q4_K_M" // this one works with tools
+        },
+        "Qwen3.6-27B-Uncensored-HauhauCS-Balanced-Q6_K_P": {
+          "name": "Qwen3.6-27B-Uncensored-HauhauCS-Balanced-Q6_K_P"
+        }
+      }
+    }
+  },
+  "plugin": [
+    "@tarquinen/opencode-dcp@1.2.7",
+    "opencode-pty",
+    "opencode-websearch-cited@1.1.1",
+    "@mohak34/opencode-notifier@0.1.14"
+  ],
+  "mcp": {
+    "mcpu": {
+      "type": "local",
+      "command": ["npx", "--package=@mcpu/cli", "-c", "mcpu-mcp"],
+      "enabled": true
+    }
+  }
+}

@@ -66,7 +66,7 @@ dotfiles/
 │   │   │   └── dap.nix                # DAP + dap-go, dap-python, dap-ui
 │   │   ├── browsers.nix             # Default browser (Firefox), xdg-mime defaults
 │   │   ├── terminal.nix             # Ghostty
-│   │   ├── gui.nix                  # Plasma desktop config (shortcuts, kwin, theme)
+│   │   ├── gui.nix                  # Plasma desktop config (panels/pinned launchers, shortcuts, kwin, theme)
 │   │   ├── rofi.nix                 # Rofi launcher config
 │   │   └── packages.nix             # User packages (vlc, etc.)
 │   └── darwin/                        # Shared macOS system modules

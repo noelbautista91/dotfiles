@@ -3,6 +3,34 @@
 {
   programs.plasma = {
     enable = true;
+    panels = [
+      {
+        location = "bottom";
+        height = 44;
+        widgets = [
+          "kickoff"
+          "pager"
+          {
+            iconTasks = {
+              launchers = [
+                "applications:systemsettings.desktop"
+                "preferred://filemanager"
+                "applications:com.mitchellh.ghostty.desktop"
+                "applications:firefox.desktop"
+              ];
+            };
+          }
+          "marginsseparator"
+          {
+            systemTray = {
+              pin = true;
+            };
+          }
+          "digitalclock"
+          "showdesktop"
+        ];
+      }
+    ];
     workspace = {
       colorScheme = "BreezeDark";
       lookAndFeel = "org.kde.breezedark.desktop";
