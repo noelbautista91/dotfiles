@@ -3,9 +3,9 @@
     "command": "nix",
     "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "@modelcontextprotocol/server-memory"]
   },
-  "chroma": {
+  "db-mcp": {
     "command": "nix",
-    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "chroma-mcp", "--client-type", "persistent", "--data-dir", "/home/noelbautista91/Documents/Projects/memory"]
+    "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "db-mcp", "--sqlite-native", "/home/noelbautista91/Documents/Projects/memory/memory.db", "--tool-filter", "codemode"]
   },
   "beads": {
     "command": "nix",

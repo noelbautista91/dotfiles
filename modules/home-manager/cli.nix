@@ -18,6 +18,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     DOCKER_BUILDKIT = "1";
+    SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
   };
 
   home.sessionPath = [

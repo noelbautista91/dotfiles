@@ -120,64 +120,95 @@ Never write commands like `python3 script.py` or `jq '.' file.json` without wrap
 ### File paths in Nix scripts
 When writing Nix derivations or scripts that reference files, use relative paths from the repo root or `builtins.pathExists` checks. Never hardcode absolute paths like `/home/username/...` in Nix modules — use `config.home.homeDirectory` or `config.users.users.<name>.home` instead.
 
-## ChromaDB — Persistent Memory
+## db-mcp — Persistent Memory
 
-ChromaDB (via `chroma` MCP server in mcpu) is your long-term memory. Use it
-proactively — do not wait for the user to ask.
+db-mcp (via `db-mcp` MCP server in mcpu) is your long-term memory, backed by a
+local SQLite database. Use it proactively — do not wait for the user to ask.
 
-### Collections
+The `db-mcp` server is configured with `--tool-filter codemode`, which reduces
+the tool surface to a single sandboxed JS execution tool (`codemode_run`) plus
+resources. This means you interact with the database through `codemode_run`
+calls that execute JavaScript against the SQLite database, rather than calling
+individual SQL tools directly.
 
-Namespaced by project (repo directory name, lowercase): `<project>-decisions`,
-`<project>-fixes`, `<project>-preferences`, `<project>-context`. One global
-collection: `global-preferences`.
+### Quick reference
 
-| Collection | What to store | ID format |
+| Action | How |
+|---|---|
+| List tables | `codemode_run` with `SELECT name FROM sqlite_master WHERE type='table'` |
+| Describe table | `codemode_run` with `PRAGMA table_info(<table>)` |
+| Create table | `codemode_run` with `CREATE TABLE IF NOT EXISTS <table> (...)` |
+| Insert row | `codemode_run` with `INSERT INTO <table> (...) VALUES (...)` |
+| Query rows | `codemode_run` with `SELECT ... FROM <table> WHERE ...` |
+| Update row | `codemode_run` with `UPDATE <table> SET ... WHERE ...` |
+| Delete row | `codemode_run` with `DELETE FROM <table> WHERE ...` |
+| Full-text search | `codemode_run` with `SELECT ... FROM <table> WHERE <column> LIKE '%<term>%'` or FTS5 |
+| View schema | Use resource `sqlite://schema` |
+
+### Tables
+
+Namespaced by project (repo directory name, lowercase). Create tables on first
+write if they don't exist.
+
+| Table | Purpose | Schema |
 |---|---|---|
-| `<project>-decisions` | Architectural choices, tradeoffs, rationale | `decision:<scope>:<topic>` |
-| `<project>-fixes` | Bugs resolved — symptom, cause, fix | `fix:<area>:<keyword>` |
-| `<project>-preferences` | Project-specific style/workflow preferences | `pref:<topic>` |
-| `<project>-context` | Conventions, gotchas, structural facts | `ctx:<area>:<topic>` |
-| `global-preferences` | Preferences applying across all projects | `pref:<topic>` |
+| `<project>_decisions` | Architectural choices, tradeoffs, rationale | `id TEXT PRIMARY KEY, date TEXT, category TEXT, module TEXT, content TEXT, why TEXT` |
+| `<project>_fixes` | Bugs resolved — symptom, cause, fix | `id TEXT PRIMARY KEY, date TEXT, area TEXT, symptom TEXT, cause TEXT, fix TEXT` |
+| `<project>_preferences` | Project-specific style/workflow preferences | `id TEXT PRIMARY KEY, date TEXT, topic TEXT, preference TEXT, rationale TEXT` |
+| `<project>_context` | Conventions, gotchas, structural facts | `id TEXT PRIMARY KEY, date TEXT, area TEXT, topic TEXT, fact TEXT` |
+| `global_preferences` | Preferences applying across all projects | `id TEXT PRIMARY KEY, date TEXT, topic TEXT, preference TEXT, rationale TEXT` |
 
-If a collection doesn't exist yet, create it with `create_collection` before
-writing.
+ID format conventions:
+- decisions: `decision_<scope>_<topic>`
+- fixes: `fix_<area>_<keyword>`
+- preferences: `pref_<topic>`
+- context: `ctx_<area>_<topic>`
+
+### Creating tables
+
+Before first write, create the table if it doesn't exist:
+
+```
+codemode_run with:
+CREATE TABLE IF NOT EXISTS <project>_decisions (
+  id TEXT PRIMARY KEY,
+  date TEXT,
+  category TEXT,
+  module TEXT,
+  content TEXT,
+  why TEXT
+)
+```
 
 ### Document format
 
-Each document = one atomic fact. Include metadata with every document:
-
-```
-Declarative statement of the fact.
-
-Why: context on why this matters or when it's relevant.
-```
-
-Required metadata: `{"date": "YYYY-MM-DD", "source": "opencode", "category": "architecture|bug|style|convention|gotcha|preference", "module": "..."}`
+Each row = one atomic fact. The `content` or `fact` column holds the
+declarative statement. The `why` column provides context on why it matters.
 
 ### Query triggers (always)
 
-- Before debugging an error → search `<project>-fixes`
-- Before architectural/design choices → search `<project>-decisions`
-- Before style or formatting decisions → search `<project>-preferences` and `global-preferences`
-- When unfamiliar with a project area → search `<project>-context`
+- Before debugging an error → query `<project>_fixes`
+- Before architectural/design choices → query `<project>_decisions`
+- Before style or formatting decisions → query `<project>_preferences` and `global_preferences`
+- When unfamiliar with a project area → query `<project>_context`
 
 ### Write triggers (always)
 
-- After resolving a non-obvious bug → `<project>-fixes`
-- After making a design decision → `<project>-decisions`
-- After learning a user preference → `<project>-preferences` or `global-preferences`
-- After discovering a convention or gotcha → `<project>-context`
+- After resolving a non-obvious bug → `<project>_fixes`
+- After making a design decision → `<project>_decisions`
+- After learning a user preference → `<project>_preferences` or `global_preferences`
+- After discovering a convention or gotcha → `<project>_context`
 
 Before writing to `decisions` or `fixes`: query first to check for duplicates.
-Use `peek_collection` or `get_documents` by ID. If similar exists, use
-`update_documents` instead of `add_documents`.
+Use a SELECT to find existing rows with similar IDs or content. If similar
+exists, use UPDATE instead of INSERT.
 
 ### Hygiene
 
-- One fact per document, not compound knowledge dumps
+- One fact per row, not compound knowledge dumps
 - No ephemeral state (currently-open files, temp decisions)
 - No secrets (tokens, keys, passwords)
-- Prune stale entries when you find them during queries (update or delete)
+- Prune stale rows when you find them during queries (DELETE or UPDATE)
 
 ## Dotfiles Repo Conventions
 
