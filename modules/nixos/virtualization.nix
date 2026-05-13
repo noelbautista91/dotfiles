@@ -10,4 +10,6 @@
       defaultNetwork.settings.dns_enabled = lib.mkDefault true;
     };
   };
+
+  environment.systemPackages = [ pkgs.podman-compose ];
 }
