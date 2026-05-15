@@ -49,8 +49,9 @@ dotfiles/
 │   │   ├── packages.nix              # System-level packages (nodejs, etc.)
 │   │   ├── security.nix              # SSH hardening, 1Password, firejail, Firefox
 │   │   ├── services.nix              # Timezone, locale, libinput, btrfs
-│   │   ├── users.nix                 # User creation, groups, SSH keys (option: my.user.name)
-│   │   └── virtualization.nix        # Podman, Docker compat
+    │   │   ├── tailscale.nix            # Tailscale mesh VPN (daemon, nftables mode, trusted interface)
+    │   │   ├── users.nix                 # User creation, groups, SSH keys (option: my.user.name)
+    │   │   └── virtualization.nix        # Podman, Docker compat
 │   ├── home-manager/                 # Shared home-manager user modules
 │   │   ├── default.nix               # Aggregator — imports all sub-modules
 │   │   ├── cli.nix                   # zsh, git, ssh, tmux (resurrect, continuum), direnv, distrobox, aliases, session vars, PATH, playwright-mcp service

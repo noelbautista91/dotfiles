@@ -57,7 +57,7 @@
   "mcp": {
     "mcpu": {
       "type": "local",
-      "command": ["npx", "--package=@mcpu/cli", "-c", "mcpu-mcp"],
+      "command": ["nix", "shell", "nixpkgs#nodejs", "--command", "npx", "--package=@mcpu/cli", "-c", "mcpu-mcp"],
       "enabled": true
     }
   }

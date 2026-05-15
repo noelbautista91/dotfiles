@@ -4,8 +4,8 @@
     "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "@modelcontextprotocol/server-memory"]
   },
   "db-mcp": {
-    "command": "nix",
-    "args": ["shell", "nixpkgs#nodejs", "--command", "npx", "-y", "db-mcp", "--sqlite-native", "/home/noelbautista91/Documents/Projects/memory/memory.db", "--tool-filter", "codemode"]
+    "type": "http",
+    "url": "http://localhost:3001/mcp"
   },
   "beads": {
     "command": "nix",

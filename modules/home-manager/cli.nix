@@ -21,6 +21,31 @@
     SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
   };
 
+  home.packages = [
+    (pkgs.writeShellApplication {
+      name = "db-mcp";
+      runtimeInputs = with pkgs; [ nodejs ];
+      text = ''
+        exec npx -y db-mcp --sqlite-native "$HOME/Documents/Projects/memory/memory.db" --tool-filter codemode --transport http --port 3001
+      '';
+    })
+  ];
+
+  systemd.user.services.db-mcp = {
+    Unit = {
+      Description = "db-mcp persistent memory server (HTTP/SSE)";
+      After = [ "network.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.nodejs}/bin/npx -y db-mcp --sqlite-native %h/Documents/Projects/memory/memory.db --tool-filter codemode --transport http --port 3001";
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   home.sessionPath = [
     "${config.home.homeDirectory}/Documents/Projects/dotfiles/bin"
   ];

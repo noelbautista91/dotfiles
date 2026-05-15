@@ -11,6 +11,7 @@
     ./packages.nix
     ./security.nix
     ./services.nix
+    ./tailscale.nix
     ./users.nix
     ./virtualization.nix
   ];
