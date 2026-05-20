@@ -174,6 +174,43 @@ The mcpu config is propagated to `~/.config/mcpu/` via `xdg.configFile` in `modu
    bin/update
    ```
 
+## Home Server (orbiter)
+
+All services run on the local machine via Docker, reachable at `localhost`.
+
+### Service Inventory
+
+| Service | Container | Port(s) | Notes |
+|---------|-----------|---------|-------|
+| db-mcp | `localhost/server_db-mcp:latest` | 3000 | Knowledge graph MCP server (HTTP transport at `/mcp`) |
+| Caddy | `docker.io/library/caddy:2` | 8080-8081→80-81, 8443-8444→443-444 | Reverse proxy |
+| PostgreSQL | `docker.io/library/postgres:18` | 5432 | Database for db-mcp, Forgejo, pages |
+| Forgejo | `localhost/server_forgejo:latest` | 2222→2222 (SSH), 3000 (web) | Self-hosted Git |
+| pages-travel | `localhost/server_pages-travel:latest` | 8090 | Travel site (Pasta framework) |
+| pages-tech | `localhost/server_pages-tech:latest` | 8091 | Tech site (Pasta framework) |
+
+### db-mcp Knowledge Graph
+
+The `db-mcp` MCP server (configured in `config/mcpu/config.json`) provides a SQLite-backed knowledge graph. It is the primary long-term memory for opencode in this dotfiles repo.
+
+**Tables** (namespaced by project, e.g., `dotfiles_decisions`):
+
+| Table | Purpose |
+|-------|---------|
+| `<project>_decisions` | Architectural choices, tradeoffs, rationale |
+| `<project>_fixes` | Bugs resolved — symptom, cause, fix |
+| `<project>_preferences` | Project-specific style/workflow preferences |
+| `<project>_context` | Conventions, gotchas, structural facts |
+| `global_preferences` | Preferences applying across all projects |
+
+**How to query** — use the `db-mcp` MCP server via `codemode_run`:
+
+```
+codemode_run with: SELECT * FROM dotfiles_decisions WHERE content LIKE '%topic%'
+```
+
+See the `db-mcp — Persistent Memory` section in `config/opencode/AGENTS.md` for full schema, ID conventions, and write triggers.
+
 ## Module Conventions
 
 - All shared modules use `lib.mkDefault` for values so hosts can override them

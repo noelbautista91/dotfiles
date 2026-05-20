@@ -5,11 +5,14 @@
   },
   "db-mcp": {
     "type": "http",
-    "url": "http://localhost:3001/mcp"
+    "url": "http://localhost:3000/mcp"
   },
   "beads": {
     "command": "nix",
-    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "beads-mcp"]
+    "args": ["shell", "nixpkgs#uv", "--command", "uvx", "beads-mcp"],
+    "env": {
+      "BEADS_WORKING_DIR": "/home/noelbautista91/Documents/Projects/memory"
+    }
   },
   "sequential-thinking": {
     "command": "nix",
