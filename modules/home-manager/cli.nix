@@ -48,6 +48,7 @@
 
   home.sessionPath = [
     "${config.home.homeDirectory}/Documents/Projects/dotfiles/bin"
+    "${config.home.homeDirectory}/go/bin"
   ];
 
   programs.git = {
